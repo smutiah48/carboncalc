@@ -183,7 +183,7 @@ import time, threading
 ngrok.set_auth_token("2zMNXLGTdKjdXD88EzG1eCufrs0_3aXmqnevjddytjFQqo2bs")
 
 def run():
-    !streamlit run carboncalc.py > /dev/null 2>&1
+    streamlit run carboncalc.py
 
 threading.Thread(target=run).start()
 time.sleep(4)

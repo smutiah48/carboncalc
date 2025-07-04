@@ -177,16 +177,26 @@ with open("carboncalc.py", "w") as f:
     f.write(code)
 
 # 2. Run streamlit & expose via ngrok
-from pyngrok import ngrok
-import time, threading
 
+import subprocess
+import threading
+import time
+from pyngrok import ngrok
+
+# 🔐 Ganti dengan token kamu dari ngrok.com
 ngrok.set_auth_token("2zMNXLGTdKjdXD88EzG1eCufrs0_3aXmqnevjddytjFQqo2bs")
 
-def run():
-    streamlit run carboncalc.py
+# ✅ Fungsi untuk menjalankan Streamlit
+def run_streamlit():
+    subprocess.Popen(["streamlit", "run", "carboncalc.py"])
 
-threading.Thread(target=run).start()
-time.sleep(4)
+# 🚀 Jalankan Streamlit di thread terpisah
+threading.Thread(target=run_streamlit).start()
+
+# ⏳ Tunggu 5 detik supaya Streamlit siap
+time.sleep(5)
+
+# 🌐 Buka port 8501 dengan ngrok
 public_url = ngrok.connect(8501)
-print("✅ Your CarbonCalc Dashboard is live at:")
+print("✅ Dashboard is live at:")
 print(public_url)
